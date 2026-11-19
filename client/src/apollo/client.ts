@@ -10,7 +10,7 @@ import { setContext } from "@apollo/client/link/context";
 
 // GraphQL server connection
 const httpLink = new HttpLink({
-  uri: "http://localhost:5000/graphql",
+  uri: "https://bugdesk-backend.onrender.com/graphql",
 });
 
 // Attach JWT to every request
