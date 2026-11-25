@@ -92,17 +92,14 @@ function Register() {
 
     return (
         <div className="flex min-h-screen flex-col bg-[#f4f7f2] dark:bg-gray-950">
-
-            {/* REGISTRATION PAGE CONTENT */}
-            <div className="flex-1 lg:grid lg:grid-cols-2">
+            <div className="flex-1 min-[900px]:grid min-[900px]:grid-cols-2">
 
                 {/* LEFT SIDE */}
-                <section className="relative hidden min-h-screen flex-col justify-between overflow-hidden bg-linear-to-br from-[#102e22] via-[#164b35] to-[#23764b] p-12 text-white lg:flex">
+                <section className="relative hidden min-h-screen flex-col justify-between overflow-hidden bg-linear-to-br from-[#102e22] via-[#164b35] to-[#23764b] p-12 text-white min-[900px]:flex">
 
                     <div className="absolute -right-28 -top-28 h-96 w-96 rounded-full border-50 border-white/5" />
                     <div className="absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-lime-400/10 blur-3xl" />
 
-                    {/* BRAND */}
                     <div className="relative z-10">
                         <div className="flex items-center gap-3">
                             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-400 text-2xl shadow-lg shadow-black/20">
@@ -115,7 +112,6 @@ function Register() {
                         </div>
                     </div>
 
-                    {/* BRANDING CONTENT */}
                     <div className="relative z-10 my-12 max-w-xl">
                         <span className="mb-6 inline-flex rounded-full border border-lime-300/30 bg-lime-300/10 px-4 py-2 text-sm font-medium text-lime-200">
                             ✨ Your team's new favourite workspace
@@ -138,7 +134,6 @@ function Register() {
 
                         {/* WORKSPACE PREVIEW */}
                         <div className="mt-12 max-w-md -rotate-2 rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur-md">
-
                             <div className="mb-5 flex items-center justify-between">
                                 <div>
                                     <p className="text-sm text-green-100/70">
@@ -161,9 +156,7 @@ function Register() {
                                         Report issues
                                     </p>
 
-                                    <p className="mt-2 text-2xl font-bold">
-                                        🐛
-                                    </p>
+                                    <p className="mt-2 text-2xl font-bold">🐛</p>
                                 </div>
 
                                 <div className="rounded-2xl bg-white/10 p-4">
@@ -171,9 +164,7 @@ function Register() {
                                         Fix together
                                     </p>
 
-                                    <p className="mt-2 text-2xl font-bold">
-                                        🛠️
-                                    </p>
+                                    <p className="mt-2 text-2xl font-bold">🛠️</p>
                                 </div>
                             </div>
 
@@ -189,19 +180,17 @@ function Register() {
                         </div>
                     </div>
 
-                    {/* BOTTOM BRAND MESSAGE */}
                     <p className="relative z-10 text-sm text-green-100/60">
                         Bugdesk · Built for better teamwork.
                     </p>
                 </section>
 
                 {/* RIGHT SIDE */}
-                <section className="flex min-h-screen items-center justify-center px-5 py-10 sm:px-10 lg:px-12">
-
+                <section className="flex min-h-screen items-center justify-center px-5 py-10 sm:px-10 min-[900px]:px-12">
                     <div className="w-full max-w-lg">
 
                         {/* MOBILE BRAND */}
-                        <div className="mb-8 flex items-center justify-center gap-2 lg:hidden">
+                        <div className="mb-8 flex items-center justify-center gap-2 min-[900px]:hidden">
                             <span className="text-3xl">🐞</span>
 
                             <span className="text-2xl font-black tracking-wide text-[#164b35] dark:text-lime-400">
@@ -284,7 +273,6 @@ function Register() {
                                 </label>
 
                                 <div className="grid grid-cols-2 gap-3">
-
                                     {/* TESTER */}
                                     <button
                                         type="button"
@@ -302,9 +290,7 @@ function Register() {
                                             </span>
                                         )}
 
-                                        <span className="mb-3 block text-3xl">
-                                            🔍
-                                        </span>
+                                        <span className="mb-3 block text-3xl">🔍</span>
 
                                         <span className="block font-bold text-gray-900 dark:text-white">
                                             Tester
@@ -332,9 +318,7 @@ function Register() {
                                             </span>
                                         )}
 
-                                        <span className="mb-3 block text-3xl">
-                                            💻
-                                        </span>
+                                        <span className="mb-3 block text-3xl">💻</span>
 
                                         <span className="block font-bold text-gray-900 dark:text-white">
                                             Developer
@@ -344,7 +328,6 @@ function Register() {
                                             Receive bugs and fix issues.
                                         </span>
                                     </button>
-
                                 </div>
 
                                 <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
@@ -446,7 +429,6 @@ function Register() {
                                     ? "Creating your account..."
                                     : "Create My Account →"}
                             </button>
-
                         </form>
 
                         {/* LOGIN LINK */}
@@ -464,12 +446,10 @@ function Register() {
                             By joining Bugdesk, you're ready to build better
                             software together.
                         </p>
-
                     </div>
                 </section>
             </div>
 
-            {/* REUSABLE AUTH FOOTER */}
             <AuthFooter />
         </div>
     );

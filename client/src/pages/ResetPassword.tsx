@@ -178,10 +178,10 @@ export default function ResetPassword() {
 
     return (
         <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-[#0b120e]">
-            <main className="grid flex-1 lg:grid-cols-2">
+            <main className="grid flex-1 min-[900px]:grid-cols-2">
 
                 {/* Branding panel */}
-                <section className="relative hidden overflow-hidden bg-linear-to-br from-green-950 via-green-900 to-green-800 px-12 py-14 text-white lg:flex lg:flex-col lg:justify-between xl:px-20">
+                <section className="relative hidden overflow-hidden bg-linear-to-br from-green-950 via-green-900 to-green-800 px-12 py-14 text-white min-[900px]:flex min-[900px]:flex-col min-[900px]:justify-between xl:px-20">
                     <div className="absolute -right-28 -top-28 h-96 w-96 rounded-full border border-white/10" />
                     <div className="absolute -bottom-40 -left-32 h-120 w-120 rounded-full border border-lime-300/10" />
                     <div className="absolute right-20 top-1/2 h-48 w-48 rounded-full bg-lime-400/10 blur-3xl" />
@@ -242,12 +242,12 @@ export default function ResetPassword() {
                 </section>
 
                 {/* Form panel */}
-                <section className="flex items-center justify-center px-5 py-12 sm:px-10 lg:px-12">
+                <section className="flex items-center justify-center px-5 py-12 sm:px-10 min-[900px]:px-12">
                     <div className="w-full max-w-md">
 
                         <Link
                             to="/"
-                            className="mb-10 block text-center text-3xl font-extrabold tracking-tight text-green-900 dark:text-lime-400 lg:hidden"
+                            className="mb-10 block text-center text-3xl font-extrabold tracking-tight text-green-900 dark:text-lime-400 min-[900px]:hidden"
                         >
                             BUGDESK
                         </Link>

@@ -58,10 +58,10 @@ function Login() {
         <div className="flex min-h-screen flex-col bg-[#f4f7f3] dark:bg-gray-950">
 
             {/* AUTH PAGE CONTENT */}
-            <div className="grid flex-1 lg:grid-cols-2">
+            <div className="grid flex-1 min-[900px]:grid-cols-2">
 
                 {/* LEFT SIDE */}
-                <div className="relative hidden flex-col justify-between overflow-hidden bg-linear-to-br from-[#142d22] via-[#1d422f] to-[#28583b] p-12 text-white lg:flex xl:p-16">
+                <div className="relative hidden flex-col justify-between overflow-hidden bg-linear-to-br from-[#142d22] via-[#1d422f] to-[#28583b] p-12 text-white min-[900px]:flex xl:p-16">
 
                     <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-green-400/10 blur-3xl" />
                     <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-lime-400/10 blur-3xl" />
@@ -178,12 +178,12 @@ function Login() {
                 </div>
 
                 {/* RIGHT SIDE */}
-                <div className="flex items-center justify-center p-5 sm:p-10 lg:p-12">
+                <div className="flex items-center justify-center p-5 sm:p-10 min-[900px]:p-12">
 
                     <div className="w-full max-w-md">
 
                         {/* MOBILE BRAND */}
-                        <div className="mb-8 text-center lg:hidden">
+                        <div className="mb-8 text-center min-[900px]:hidden">
                             <div className="mb-3 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-green-600 to-lime-500 text-3xl shadow-lg">
                                 🐞
                             </div>

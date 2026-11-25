@@ -87,7 +87,6 @@ export default function VerifyEmail() {
         return () => window.clearTimeout(timer);
     }, [countdown]);
 
-    // Handle individual verification-code inputs
     const handleCodeChange = (index: number, value: string) => {
         const digit = value.replace(/\D/g, "").slice(-1);
 
@@ -108,7 +107,6 @@ export default function VerifyEmail() {
         }
     };
 
-    // Move backwards when deleting an empty input
     const handleKeyDown = (
         index: number,
         event: KeyboardEvent<HTMLInputElement>
@@ -126,7 +124,6 @@ export default function VerifyEmail() {
         }
     };
 
-    // Allow users to paste their complete verification code
     const handlePaste = (event: ClipboardEvent<HTMLInputElement>) => {
         event.preventDefault();
 
@@ -235,7 +232,7 @@ export default function VerifyEmail() {
         }
     };
 
-    // Missing email state
+    // MISSING EMAIL STATE
     if (!email) {
         return (
             <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-[#0b120e]">
@@ -266,13 +263,12 @@ export default function VerifyEmail() {
 
     return (
         <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-[#0b120e]">
-            <main className="flex flex-1 items-center justify-center p-4 sm:p-6 lg:p-8">
-                <div className="grid w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-2xl dark:bg-[#142019] lg:min-h-170 lg:grid-cols-2">
+            <main className="flex flex-1 items-center justify-center p-4 sm:p-6 min-[900px]:p-8">
+                <div className="grid w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-2xl dark:bg-[#142019] min-[900px]:min-h-170 min-[900px]:grid-cols-2">
 
-                    {/* Left branding panel */}
-                    <section className="relative hidden flex-col justify-between overflow-hidden bg-linear-to-br from-green-950 via-green-900 to-[#163d27] p-10 text-white lg:flex xl:p-14">
+                    {/* LEFT BRANDING PANEL */}
+                    <section className="relative hidden flex-col justify-between overflow-hidden bg-linear-to-br from-green-950 via-green-900 to-[#163d27] p-10 text-white min-[900px]:flex xl:p-14">
 
-                        {/* Decorative circles */}
                         <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full border border-lime-400/10" />
                         <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full border border-lime-400/10" />
                         <div className="absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-lime-400/5 blur-2xl" />
@@ -291,8 +287,7 @@ export default function VerifyEmail() {
                         </div>
 
                         <div className="relative z-10 max-w-lg">
-
-                            {/* Security illustration */}
+                            {/* SECURITY ILLUSTRATION */}
                             <div className="mb-10 flex h-56 items-center justify-center">
                                 <div className="relative flex h-48 w-48 items-center justify-center rounded-full border border-lime-300/20 bg-green-800/40">
                                     <div className="absolute h-36 w-36 rounded-full border border-lime-300/20" />
@@ -389,13 +384,12 @@ export default function VerifyEmail() {
                         </div>
                     </section>
 
-                    {/* Right verification panel */}
-                    <section className="flex flex-col justify-center px-6 py-10 sm:px-12 lg:px-12 xl:px-16">
-
+                    {/* RIGHT VERIFICATION PANEL */}
+                    <section className="flex flex-col justify-center px-6 py-10 sm:px-12 min-[900px]:px-12 xl:px-16">
                         <div className="mx-auto w-full max-w-md">
 
-                            {/* Mobile brand */}
-                            <div className="mb-10 text-center lg:hidden">
+                            {/* MOBILE BRAND */}
+                            <div className="mb-10 text-center min-[900px]:hidden">
                                 <Link
                                     to="/"
                                     className="text-3xl font-extrabold tracking-tight text-green-900 dark:text-lime-400"
@@ -408,7 +402,7 @@ export default function VerifyEmail() {
                                 </p>
                             </div>
 
-                            {/* Heading */}
+                            {/* HEADING */}
                             <div className="text-center sm:text-left">
                                 <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-lime-400">
                                     <svg
@@ -442,7 +436,7 @@ export default function VerifyEmail() {
                                 </p>
                             </div>
 
-                            {/* Verification form */}
+                            {/* VERIFICATION FORM */}
                             <form onSubmit={handleVerify} className="mt-9">
                                 <label className="mb-3 block text-sm font-semibold text-gray-700 dark:text-gray-300">
                                     Enter verification code
@@ -508,7 +502,7 @@ export default function VerifyEmail() {
                                 </button>
                             </form>
 
-                            {/* Resend code */}
+                            {/* RESEND CODE */}
                             <div className="mt-7 text-center">
                                 <p className="text-sm text-gray-600 dark:text-gray-400">
                                     Didn't receive a code?
@@ -528,7 +522,7 @@ export default function VerifyEmail() {
                                 </button>
                             </div>
 
-                            {/* Back to login */}
+                            {/* BACK TO LOGIN */}
                             <div className="mt-8 border-t border-gray-200 pt-6 text-center dark:border-gray-700">
                                 <Link
                                     to="/login"
