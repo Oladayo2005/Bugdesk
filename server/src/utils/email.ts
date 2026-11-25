@@ -1,85 +1,94 @@
 
-import nodemailer from "nodemailer";
+import { google } from "googleapis";
 
 type VerificationEmailOptions = {
-    email: string;
-    code: string;
-    purpose: "registration" | "login" | "password-reset";
+  email: string;
+  code: string;
+  purpose: "registration" | "login" | "password-reset";
 };
 
 export const sendVerificationEmail = async ({
-    email,
-    code,
-    purpose,
-}: VerificationEmailOptions) => {
-    const gmailUser = process.env.GMAIL_USER;
-    const gmailPassword = process.env.GMAIL_APP_PASSWORD;
+  email,
+  code,
+  purpose,
+}: VerificationEmailOptions): Promise<void> => {
+  const gmailUser = process.env.GMAIL_USER;
+  const clientId = process.env.GMAIL_CLIENT_ID;
+  const clientSecret = process.env.GMAIL_CLIENT_SECRET;
+  const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
 
-    if (!gmailUser || !gmailPassword) {
-        throw new Error("Gmail email credentials are not configured.");
-    }
+  if (!gmailUser || !clientId || !clientSecret || !refreshToken) {
+    throw new Error("Gmail API environment variables are missing.");
+  }
 
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: gmailUser,
-            pass: gmailPassword.replace(/\s/g, ""),
-        },
+  const subjects = {
+    registration: "Verify your Bugdesk account",
+    login: "Your Bugdesk login verification code",
+    "password-reset": "Reset your Bugdesk password",
+  };
+
+  const messages = {
+    registration: "Use this code to verify your email address.",
+    login: "Use this code to complete your login.",
+    "password-reset": "Use this code to reset your password.",
+  };
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 24px; color: #333;">
+      <h2 style="color: #2563eb;">Bugdesk</h2>
+      <h3>${subjects[purpose]}</h3>
+      <p>${messages[purpose]}</p>
+      <div style="font-size: 32px; font-weight: bold; letter-spacing: 8px; padding: 20px; background: #f3f4f6; text-align: center; border-radius: 8px;">
+        ${code}
+      </div>
+      <p>This code expires in 10 minutes.</p>
+      <p>If you did not request this code, you can ignore this email.</p>
+    </div>
+  `;
+
+  const auth = new google.auth.OAuth2(
+    clientId,
+    clientSecret,
+    "https://developers.google.com/oauthplayground"
+  );
+
+  auth.setCredentials({
+    refresh_token: refreshToken,
+  });
+
+  const gmail = google.gmail({
+    version: "v1",
+    auth,
+  });
+
+  const rawMessage = [
+    `From: Bugdesk <${gmailUser}>`,
+    `To: ${email}`,
+    `Subject: ${subjects[purpose]}`,
+    "MIME-Version: 1.0",
+    'Content-Type: text/html; charset="UTF-8"',
+    "Content-Transfer-Encoding: 8bit",
+    "",
+    html,
+  ].join("\r\n");
+
+  const encodedMessage = Buffer.from(rawMessage, "utf8")
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+
+  try {
+    const response = await gmail.users.messages.send({
+      userId: "me",
+      requestBody: {
+        raw: encodedMessage,
+      },
     });
 
-    const subjects = {
-        registration: "Verify your Bugdesk account",
-        login: "Your Bugdesk login verification code",
-        "password-reset": "Reset your Bugdesk password",
-    };
-
-    const messages = {
-        registration:
-            "Use this code to verify your email address and complete your Bugdesk registration.",
-        login: "Use this code to complete your Bugdesk login.",
-        "password-reset":
-            "Use this code to verify your request to reset your Bugdesk password.",
-    };
-
-    try {
-        const info = await transporter.sendMail({
-            from: `"Bugdesk" <${gmailUser}>`,
-            to: email,
-            subject: subjects[purpose],
-            html: `
-                <div style="font-family: Arial, sans-serif; max-width: 520px; margin: 0 auto; padding: 30px; color: #1f2937;">
-                    <div style="background: #14532d; padding: 24px; border-radius: 12px 12px 0 0; text-align: center;">
-                        <h1 style="color: #ffffff; margin: 0;">BUGDESK</h1>
-                        <p style="color: #d9f99d; margin-bottom: 0;">Find bugs. Fix things. Ship better.</p>
-                    </div>
-
-                    <div style="padding: 28px; border: 1px solid #e5e7eb; border-top: 0; border-radius: 0 0 12px 12px;">
-                        <h2 style="margin-top: 0;">${subjects[purpose]}</h2>
-
-                        <p>${messages[purpose]}</p>
-
-                        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 20px; text-align: center; margin: 24px 0;">
-                            <p style="margin: 0 0 8px; color: #166534; font-size: 13px;">YOUR VERIFICATION CODE</p>
-                            <h1 style="letter-spacing: 10px; color: #14532d; margin: 0; font-size: 32px;">
-                                ${code}
-                            </h1>
-                        </div>
-
-                        <p>This code expires in <strong>10 minutes</strong>.</p>
-
-                        <p style="color: #6b7280; font-size: 13px;">
-                            If you did not request this code, you can safely ignore this email.
-                        </p>
-                    </div>
-                </div>
-            `,
-        });
-
-        console.log("Verification email sent:", info.messageId);
-
-        return info;
-    } catch (error) {
-        console.error("Gmail email error:", error);
-        throw new Error("Unable to send verification email.");
-    }
+    console.log("Verification email sent:", response.data.id);
+  } catch (error) {
+    console.error("Gmail API email error:", error);
+    throw new Error("Failed to send verification email.");
+  }
 };
