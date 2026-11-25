@@ -174,7 +174,7 @@ function Profile() {
                                     {detail.label}
                                 </p>
 
-                                <p className="mt-2 break-words text-sm font-bold text-[#293B35] dark:text-white">
+                                <p className="mt-2 wrap-break-word text-sm font-bold text-[#293B35] dark:text-white">
                                     {detail.value}
                                 </p>
                             </div>
