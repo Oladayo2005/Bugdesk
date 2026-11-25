@@ -24,6 +24,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
 import AppLayout from "./components/AppLayout";
 
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+
 function App() {
     return (
         <BrowserRouter>
@@ -87,6 +90,9 @@ function App() {
                     path="*"
                     element={<Navigate to="/dashboard" replace />}
                 />
+
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<TermsOfService />} />
 
             </Routes>
         </BrowserRouter>
